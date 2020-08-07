@@ -11,9 +11,11 @@ add_definitions(${LLVM_DEFINITIONS})
 
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
-llvm_map_components_to_libnames(llvm_libs core)
+llvm_map_components_to_libnames(llvm_libs core mcjit orcjit native)
 
-file(GLOB HEADERS "*.h")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -rdynamic")
+
+file(GLOB HEADERS "include/*.h")
 file(GLOB SOURCES "*.cpp")
 
 add_executable(kaleidoscope_lang ${HEADERS} ${SOURCES})
